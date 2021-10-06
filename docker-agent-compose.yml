@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  theeye-agent:
+    image: theeye-io/theeye-agent:latest
+    container_name: theeye-agent
+    hostname: docker_agent
+    domainname: theeye.io
+    networks:
+      - theeye   
+    volumes:
+       - ./theeye-agent:/src/theeye-agent
+       - /src/theeye-agent/node_modules
+    environment:
+       - THEEYE_CLIENT_HOSTNAME=docker_agent
+       - THEEYE_AGENT_SCRIPT_PATH=/src/theeye-agent/scripts
+       - DEBUG=*eye*
+       - THEEYE_SUPERVISOR_API_URL=https://supervisor.theeye.io
+       - NODE_ENV=production
+    command: node core/main
+
+networks:
+   theeye:
+      external:
+         name: theeye

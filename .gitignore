@@ -19,3 +19,6 @@ web/*
 supervisor/*
 theeye-agent/*
 mongodump
+sources
+redis
+mongodb

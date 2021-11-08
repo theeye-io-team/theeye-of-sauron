@@ -1,66 +1,68 @@
 version: '2'
-
-# Maintainer: facugon
-# this is used for development
-
 services:
-  theeye-redis:
-    image: redis:latest
-    container_name: theeye-redis
-    restart: always
+#Maintainers: facugon
+
+  theeye-supervisor:
+    build: ./sources/theeye_supervisor
+    container_name: theeye-supervisor
+    hostname: supervisor
+    domainname: supervisor
+    links:
+      - theeye-gateway
     ports:
-      - "6379:6379"
+      - "60080:60080"
     volumes:
-       - /srv/docker/redis:/data
+      - ./config/supervisor.js:/src/theeye/supervisor/config/production.js
+      - ./scripts:/src/theeye/supervisor/uploads
     networks:
       - theeye
+    environment:
+      - NODE_ENV=production
+      - THEEYE_NODE_HOSTNAME=
+      - DEBUG=*eye*
+      - MONITORING_DISABLED=true
+      - SCHEDULER_JOBS_DISABLED=
+      - PORT=60080
 
-  theeye-db:
-    image: mongo:4.2
-    container_name: theeye-mongodb
+  theeye-gateway:
+    build: ./sourcestheeye/
+    container_name: theeye-gateway
+    hostname: gateway
+    domainname: gateway
+    links:
+      - theeye-web
     ports:
-      - "27017:27017"
-    restart: always
+      - "9229:9229"
+      - "6080:6080"
     volumes:
-      - /srv/docker/mongodb:/data/db
-      - ./mongodump:/data/dump
-    networks:
-      - theeye   
-
-  theeye-ldap:
-    image: rroemhild/test-openldap
-    container_name: theeye-ldap
-    restart: always
-    ports:
-      - "389:389"
-      - "636:636"
+      - ./config/gateway.json:/src/theeye/gateway/server/config/production.json
+      - ./web:/src/theeye/gateway/client/dist
     networks:
       - theeye
-
-  theeye-mailserver:
-    image: djfarrelly/maildev
-    container_name: theeye-mailserver
     restart: always
-    ports:
-      - "6083:80"
-      - "6025:25"
-    networks:
-      - theeye
+    environment:
+      - THEEYE_CONFIG_ENCRYPTED=false
+      - THEEYE_CONFIG_ENCRYPTED_IV=6c888d53cd9e5d32d4a428777e6a35e0
+      - THEEYE_CONFIG_ENCRYPTED_SECRET=7d571e7a5e4d9375cf5ec6360247ee018648efe1eccba5894ee6659db626b5dd
+      - THEEYE_CONFIG_ENCRYPTED_ALGORITHM=aes-256-ctr
+      - THEEYE_NODE_HOSTNAME=theeye
+      - NODE_ENV=production
+      - DEBUG=*eye*
+      - PORT=6080
+    #command:
+    #  - 'node'
+    #  - '--inspect=0.0.0.0:9229'
+    #  - './server'
 
-  theeye-nginx:
-    #image: nginx
-    image: imkulikov/nginx-sticky
-    container_name: theeye-nginx
-    restart: always
-    volumes: 
-      - ./nginx/etc/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/logs/:/var/log/nginx/
-    ports:
-      - "8080:80"
-    networks:
-      - theeye
+  theeye-web:
+    build:
+      context: ./sources/theeye-web
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=production
+    container_name: theeye-web
 
 networks:
-   theeye:
-      external:
-         name: theeye
+  theeye:
+     driver: bridge
+

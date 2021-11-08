@@ -4,10 +4,13 @@
 1. Clone: git clone https://github.com/theeye-io-team/theeye-dockers && cd theeye-dockers 
 2. Prepare some stuff:
    * mongodump for restoring: ```tar -xzf theeye-mongodb.tgz```
-   * dependencies (by now) We are moving this to dockerhub in the next weeks 
+   * dependencies (by now) We are moving this to dockerhub in the next weeks: 
        ```git clone --recursive https://github.com/theeye-io-team/theeye-web.git ./sources/theeye-web```
+
        ```git clone --recursive https://github.com/theeye-io-team/theeye-supervisor.git ./sources/theeye-supervisor```
+
        ```git clone --recursive https://github.com/theeye-io-team/theeye-gateway.git ./sources/theeye-gateway```
+
 3. Run some services: 
    * create network: ```docker network create theeye```
    * run redis and mongo: ```docker-compose -f quickstart.yml up -d theeye-redis theeye-db``` 

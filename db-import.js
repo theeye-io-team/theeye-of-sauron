@@ -1,4 +1,16 @@
-const dbName = "theeye-root"
+function makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(
+      Math.floor(Math.random() * charactersLength)
+    );
+  }
+  return result;
+}
+
+const dbName = "theeye-docs"
 
 const conn = new Mongo()
 const db = conn.getDB(dbName)
@@ -11,7 +23,7 @@ db.gw_user.insert({
   "devices" : [],
   "onboardingCompleted" : true,
   "_type" : "UiUser",
-  "email" : "root@theeye.io",
+  "email" : "root@custom.domain.com",
   "username" : "root",
   "credential" : "root",
   "name" : "root user",
@@ -43,7 +55,6 @@ db.customers.insert({
 })
 
 const user = db.gw_user.findOne({ username: 'root' })
-
 db.gw_passport.insert({
   "protocol" : "local",
   "password" : "$2a$10$KH4LNwQNwBaazV018qIYFum6KON.tmJxe9c2Dhbm9NXADN8uPwEx2", // 12345678
@@ -51,7 +62,7 @@ db.gw_passport.insert({
   "user_id" : user._id,
   "provider" : "theeye",
   "creation_date" : new Date(),
-  "last_update" : null,
+  "last_update" : new Date(),
   "last_access" : null,
   "last_login" : null
 })
@@ -73,5 +84,50 @@ db.gw_members.insert({
     "desktop" : false,
     "notificationFilters" : []
   },
+})
+
+// creating agent bot user.
+
+db.gw_user.insert({
+  "enabled" : true,
+  "invitation_token" : null,
+  "devices" : null,
+  "onboardingCompleted" : true,
+  "_type" : "BotUser",
+  "username" : customer.name + "+agent",
+  "email" : customer.name + "+agent@custom.domain.com",
+  "name" : customer.name + " agent",
+  "creation_date" : new Date(),
+  "last_update" : new Date(),
+  "credential" : "agent"
+})
+
+const agent = db.gw_user.findOne({ credential: 'agent' })
+db.gw_members.insert({
+  "credential" : "agent",
+  "creation_date" : new Date(),
+  "last_update" : null,
+  "user" : agent._id,
+  "user_id" : agent._id,
+  "customer" : customer._id,
+  "customer_id" : customer._id,
+  "customer_name" : customer.name
+})
+
+db.gw_passport.insert({
+  "protocol" : "local",
+  "provider" : "theeye",
+  "password" : null,
+  "identifier" : makeid(64),
+  "tokens" : {
+    "access_token" : makeid(64),
+    "refresh_token" : makeid(64)
+  },
+  "user" : agent._id,
+  "user_id" : agent._id,
+  "creation_date" : new Date(),
+  "last_update" : new Date(),
+  "last_access" : null,
+  "last_login" : null
 })
 

@@ -18,3 +18,4 @@ log
 web/*
 supervisor/*
 theeye-agent/*
+mongodump

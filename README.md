@@ -2,8 +2,12 @@
 ## QuickStart
 
 1. Clone: git clone https://github.com/theeye-io-team/theeye-dockers && cd theeye-dockers 
-2. run: ```./quickstart.sh```
 
+
+3. run: ```./quickstart.sh```
+
+
+5. Navigate http://localhost:6080 
 
 
 ## Other Info

@@ -1,0 +1,159 @@
+{
+  "app": {
+    "base_url": "http://theeye-gateway:6080",
+    "port": 6080,
+    "secret": "66666666666666666666666666666666"
+  },
+  "mongodb": {
+    "debug": false,
+    "user": "",
+    "password": "",
+    "hosts": "theeye-mongodb:27017",
+    "database": "theeye-docs",
+    "options": {
+      "useNewUrlParser": true,
+      "useUnifiedTopology": true
+    }
+  },
+  "redis": {
+    "prefix": "theeye_",
+    "host": "theeye-redis",
+    "port": 6379,
+    "db": 0
+  },
+  "models": {},
+  "integration": {
+    "bot_launcher": {
+      "url": "http://theeye-supervisor:60080/job/secret/THE_SECRET?customer=bots&task=THEYE_TASK_ID"
+    }
+  },
+  "services": {
+    "aws": {
+      "username": "",
+      "accessKeyId": "",
+      "secretAccessKey": "",
+      "region": ""
+    },
+    "registration": {
+      "enabled": true,
+      "notifyUs": true,
+      "finishUrl": "http://theeye-gateway:6080/finishregistration?",
+      "activateUrl": "http://theeye-gateway:6080/activate?",
+      "passwordResetUrl": "http://theeye-gateway:6080/passwordreset?"
+    },
+    "authentication": {
+      "secret": "99999999999999999999999999999999",
+      "expires": 10800,
+      "localBypass": true,
+      "strategies": {
+        "ldapauth": {
+          "defaultGroup": "theeye_users",
+          "defaultCustomerName": "ldap",
+          "provider": "ldap",
+          "server": {
+            "url": "ldap://theeye-ldap:389",
+            "bindDN": "cn=admin,dc=planetexpress,dc=com",
+            "bindCredentials": "GoodNewsEveryone",
+            "searchBase": "ou=people,dc=planetexpress,dc=com",
+            "searchAttributes": [
+              "uid",
+              "cn",
+              "mail",
+              "objectClass"
+            ],
+            "searchFilter": "(uid={{username}})"
+          },
+          "fields": {
+            "id": "uid",
+            "name": "cn",
+            "username": "uid",
+            "email": "mail",
+            "groups": "objectClass"
+          }
+        }
+      }
+    },
+    "notifications": {
+      "email": {
+        "from": "%customer% TheEye.io <support@local.domain.com>",
+        "replyTo": "Support <support@local.domain.com>",
+        "only_support": false,
+        "include_support_bcc": false,
+        "support": [
+          "support@local.domain.com"
+        ],
+        "invitation": "contact@local.domain.com",
+        "transport": {
+          "type": "smtp",
+          "options": {
+            "port": 6025,
+            "secure": false,
+            "ignoreTLS": true
+          }
+        },
+        "message": {
+          "activation": {
+            "enabled": true
+          },
+          "customerInvitation": {
+            "enabled": true
+          },
+          "invitation": {
+            "enabled": true
+          },
+          "passwordRecover": {
+            "enabled": true
+          },
+          "registration": {
+            "enabled": true
+          }
+        }
+      },
+      "push": {
+        "debug": false,
+        "debug_filename": "/tmp/theeye-push-dump.log",
+        "push_notifications": {
+          "android": "",
+          "ios": ""
+        }
+      },
+      "sockets": {
+        "redis": {
+          "prefix": "theeye_",
+          "host": "theeye-redis",
+          "port": 6379,
+          "db": 0
+        }
+      }
+    }
+  },
+  "supervisor": {
+    "timeout": 10000,
+    "client_id": "8888888888888888888888888888888888888888",
+    "client_secret": "7777777777777777777777777777777777777777",
+    "url": "http://theeye-supervisor:60080",
+    "port": 60080,
+    "secret": "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+  },
+  "agent": {
+    "binary": {
+      "windows": {
+        "url": "https://s3.amazonaws.com/theeye-agent/theEyeInstallerx64.exe",
+        "name": "theEyeInstallerx64.exe"
+      }
+    },
+    "installer": {
+      "linux": {
+        "url": "https://s3.amazonaws.com/theeye-agent/linux/setup.sh"
+      },
+      "windows": {
+        "url": "https://s3.amazonaws.com/theeye-agent/windows/agent-installer.ps1"
+      }
+    }
+  },
+  "grecaptcha": {
+    "v2_secret": "",
+    "v3_secret": "",
+    "url": "https://www.google.com/recaptcha/api/siteverify"
+  }
+}

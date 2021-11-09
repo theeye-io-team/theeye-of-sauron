@@ -80,6 +80,10 @@ docker exec -it theeye-mongodb mongorestore /data/dump/
 #echo "run"
 #docker-compose -f quickstart.yml up -d
 echo "################"
-echo "# READY!!"
+echo "#"
 echo "#"
 echo "# sign in using username:root and password:12345678 <- Change this ASAP. If you are considering using open to the internet."
+echo "# "
+echo "# App is ready. Navigate http://localhost:6080 "
+
+#command -v xdg-open && xdg-open http://localhost:6080

@@ -1,18 +1,29 @@
 # TheEye
+## What is TheEye?
+<table>
+  <tr>
+    <td> <img src="https://github.com/theeye-io-team/theeye-dockers/blob/master/images/TheEye-Of-Sauron.png"></td>
+    <td> TheEye is a process automation platform developed in NodeJS. Best used as BPM, Rapid Backoffice Development (RDA) and processes' hub.
+Technically TheEye is a choreographer </td>
+   </tr> 
+</table>
+
+## Architecture
+
+![Image of TheEye-overview](https://github.com/theeye-io-team/theeye-dockers/blob/master/images/TheEye-core-Architect.png)
+
+If you want more information please read the https://documentation.theeye.io
+
+# Install all theeye components on a single machine
+
 ## Pre-Requisites
 docker and docker compose installed.
 
 Docker: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
 
-
-
 Docker-compose: https://docs.docker.com/compose/install/
 
-
-
-
 very it by running:
-
 
 
 ```docker ps```
@@ -21,10 +32,7 @@ very it by running:
 If you have some permision issue add your user to the docker's group:
 
 
-
 ```sudo groupadd docker```
-
-
 
 ```sudo usermod -aG docker $USER```
 
@@ -32,15 +40,11 @@ If you have some permision issue add your user to the docker's group:
 
 ## QuickStart
 
-
-
 1. Clone: git clone https://github.com/theeye-io-team/theeye-dockers && cd theeye-dockers 
 
+2. run: ```./quickstart.sh```
 
-3. run: ```./quickstart.sh```
-
-
-5. Navigate http://localhost:6080 
+3. Navigate http://localhost:6080 
 
 
 ## Other Info

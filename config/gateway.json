@@ -51,7 +51,7 @@
           "defaultCustomerName": "ldap",
           "provider": "ldap",
           "server": {
-            "url": "ldap://theeye-ldap:389",
+            "url": "ldap://theeye-ldap:10389",
             "bindDN": "cn=admin,dc=planetexpress,dc=com",
             "bindCredentials": "GoodNewsEveryone",
             "searchBase": "ou=people,dc=planetexpress,dc=com",

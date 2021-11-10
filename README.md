@@ -3,15 +3,33 @@
 docker and docker compose installed.
 
 Docker: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+
+
+
 Docker-compose: https://docs.docker.com/compose/install/
 
-very it by running:  ```docker ps```
+
+
+
+very it by running:
+
+
+
+```docker ps```
+
+
 If you have some permision issue add your user to the docker's group:
+
+
 
 ```sudo groupadd docker```
 ```sudo usermod -aG docker $USER```
 
+
+
 ## QuickStart
+
+
 
 1. Clone: git clone https://github.com/theeye-io-team/theeye-dockers && cd theeye-dockers 
 

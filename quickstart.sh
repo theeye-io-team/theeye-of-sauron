@@ -74,6 +74,7 @@ echo "#"
 echo "################"
 cd ${cwd}
 docker run --rm -dit --name 'theeye-web-export' -v ${cwd}/web:/output 'theeye-io/theeye-web' cp -r /app/dist/. /output;
+tar -xzf theeye-mongodb.tgz
 
 echo "################"
 echo "#"
@@ -90,7 +91,6 @@ echo "# importing database"
 echo "#"
 echo "################"
 cd ${cwd}
-tar -xzf theeye-mongodb.tgz
 docker exec -it theeye-mongodb mongorestore /data/dump/
 
 #docker-compose -f quickstart.yml down

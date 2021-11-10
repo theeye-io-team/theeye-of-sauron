@@ -23,6 +23,9 @@ If you have some permision issue add your user to the docker's group:
 
 
 ```sudo groupadd docker```
+
+
+
 ```sudo usermod -aG docker $USER```
 
 

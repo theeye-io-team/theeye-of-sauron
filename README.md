@@ -55,11 +55,13 @@ If you have some permision issue add your user to the docker's group:
 
 ## QuickStart
 
-1. Clone: git clone https://github.com/theeye-io-team/theeye-of-sauron && cd theeye-of-sauron 
+1. Clone: git clone https://github.com/theeye-io-team/theeye-of-sauron && cd theeye-of-sauron   
 
-2. run: ```./quickstart.sh```
 
-3. Navigate http://localhost:6080 
+2. run: ```./quickstart.sh```   
+
+
+3. Navigate http://localhost:6080    
 
 
 ## Other Info

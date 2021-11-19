@@ -15,7 +15,7 @@ services:
     networks:
       - theeye
 
-  theeye-db:
+  theeye-mongodb:
     image: mongo:4.2
     container_name: theeye-mongodb
     ports:
@@ -116,6 +116,25 @@ services:
     #  - '--inspect=0.0.0.0:9229'
     #  - './server'
 
+  theeye-agent:
+    image: theeye/theeye-agent:development
+    container_name: theeye-agent
+    networks:
+      - theeye
+    restart: always
+    volumes:
+      - ./config/agent/config.js:/src/theeye/agent/config/production.js
+      - ./scripts:/src/theeye/supervisor/uploads
+    environment:
+      - DEBUG=*eye*err*
+      - NODE_ENV=production
+      - THEEYE_SUPERVISOR_CLIENT_ID=da4b4e840c107ce9a0f4d28961b71e070e3b80e2
+      - THEEYE_SUPERVISOR_CLIENT_SECRET=e4304720b3be25551cbb2b99c775f124e3d9ad84
+      - THEEYE_SUPERVISOR_CLIENT_CUSTOMER=theeye
+      - THEEYE_SUPERVISOR_API_URL=http://theeye-supervisor:60080
+      - THEEYE_CLIENT_HOSTNAME=theeye
+        #- THEEYE_AGENT_SCRIPT_PATH='/opt/theeye-agent/scripts'
+
   theeye-web:
     image: theeye-io/theeye-web
     build:
@@ -129,4 +148,3 @@ networks:
    theeye:
       external:
          name: theeye
-

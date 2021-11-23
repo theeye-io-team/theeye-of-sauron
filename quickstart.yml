@@ -78,11 +78,13 @@ services:
     networks:
       - theeye
     environment:
+      - DEBUG=*eye*err*
       - NODE_ENV=production
       - THEEYE_NODE_HOSTNAME=
-      - DEBUG=*eye*
-      - MONITORING_DISABLED=true
+      - MONITORING_DISABLED=
       - SCHEDULER_JOBS_DISABLED=
+      - COMMANDER_DISABLED=
+      - API_DISABLED=
       - PORT=60080
 
   theeye-gateway:
@@ -92,7 +94,10 @@ services:
     hostname: gateway
     domainname: gateway
     links:
-      - theeye-web
+      - theeye-mongodb
+      - theeye-redis
+      - theeye-ldap
+      - theeye-mailserver
     ports:
       - "9229:9229"
       - "6080:6080"
@@ -103,13 +108,13 @@ services:
       - theeye
     restart: always
     environment:
+      - DEBUG=*eye*err*
       - THEEYE_CONFIG_ENCRYPTED=false
       - THEEYE_CONFIG_ENCRYPTED_IV=6c888d53cd9e5d32d4a428777e6a35e0
       - THEEYE_CONFIG_ENCRYPTED_SECRET=7d571e7a5e4d9375cf5ec6360247ee018648efe1eccba5894ee6659db626b5dd
       - THEEYE_CONFIG_ENCRYPTED_ALGORITHM=aes-256-ctr
       - THEEYE_NODE_HOSTNAME=theeye
       - NODE_ENV=production
-      - DEBUG=*eye*
       - PORT=6080
     #command:
     #  - 'node'
@@ -122,6 +127,9 @@ services:
     networks:
       - theeye
     restart: always
+    links:
+      - theeye-supervisor
+      - theeye-gateway
     volumes:
       - ./agent/config.js:/src/theeye/agent/config/production.js
       - ./agent/downloads:/src/theeye/agent/downloads

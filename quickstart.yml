@@ -123,8 +123,9 @@ services:
       - theeye
     restart: always
     volumes:
-      - ./config/agent/config.js:/src/theeye/agent/config/production.js
-      - ./scripts:/src/theeye/supervisor/uploads
+      - ./agent/config.js:/src/theeye/agent/config/production.js
+      - ./agent/downloads:/src/theeye/agent/downloads
+      - ./agent/logs:/src/theeye/agent/logs
     environment:
       - DEBUG=*eye*err*
       - NODE_ENV=production

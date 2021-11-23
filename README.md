@@ -38,7 +38,7 @@ Docker: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-
 
 Docker-compose: https://docs.docker.com/compose/install/
 
-very it by running:
+verify it by running:
 
 
 ```docker ps```

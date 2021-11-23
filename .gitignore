@@ -4,8 +4,7 @@ server/node_modules/
 *.swp
 *.log
 old
-agent/config/conf-enabled/
-agent/config/connection.json
+agent/
 supervisor/config/*/setup/configs/
 dump
 uploads/
@@ -22,3 +21,4 @@ mongodump
 sources
 redis
 mongodb
+scripts/

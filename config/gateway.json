@@ -132,6 +132,7 @@
     "client_id": "8888888888888888888888888888888888888888",
     "client_secret": "7777777777777777777777777777777777777777",
     "url": "http://theeye-supervisor:60080",
+    "public_url": "http://localhost:60080",
     "port": 60080,
     "secret": "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
   },

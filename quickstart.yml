@@ -99,7 +99,7 @@ services:
       - theeye-ldap
       - theeye-mailserver
     ports:
-      - "9229:9229"
+      #- "9229:9229"
       - "6080:6080"
     volumes:
       - ./config/gateway.json:/src/theeye/gateway/server/config/production.json

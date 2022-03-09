@@ -2,7 +2,7 @@
 ## What is TheEye?
 <table>
   <tr>
-    <td> <img src="./images/TheEye-Of-Sauron.png"></td>
+    <td> <img src="./docs/images/TheEye-Of-Sauron.png"></td>
     <td> TheEye is a process automation platform developed in NodeJS. Best used as BPM, Rapid Backoffice Development (RDA) and processes' hub.
 Technically TheEye is a choreographer 
     </td>
@@ -25,7 +25,7 @@ Technically TheEye is a choreographer
 
 ## Architecture
 
-![Image of TheEye-overview](./images/TheEye-core-Architect.png)
+![Image of TheEye-overview](./docs/images/TheEye-core-Architect.png)
 
 If you want more information please read the https://documentation.theeye.io
 
@@ -69,7 +69,7 @@ sudo usermod -aG docker $USER
 
 ## Manual installation
 
-You may want to install TheEye from its source code, as if you were compiling it yourself. If that's the case, you can check [this guide](./manual-setup.md) to learn how to deploy TheEye's database as a standalone image. You will also need to deploy the [Web interface](http://github.com/theeye-io-team/theeye-web), the [Supervisor](http://github.com/theeye-io-team/theeye-supervisor) and the [Gateway](http://github.com/theeye-io-team/theeye-gateway) from their respective repos
+You may want to install TheEye from its source code, as if you were compiling it yourself. If that's the case, you can check [this guide](./docs/manual-setup.md) to learn how to deploy TheEye's database as a standalone image. You will also need to deploy the [Web interface](http://github.com/theeye-io-team/theeye-web), the [Supervisor](http://github.com/theeye-io-team/theeye-supervisor) and the [Gateway](http://github.com/theeye-io-team/theeye-gateway) from their respective repos
 
 > Note:
 >   This is only intended for developers that intend to work on TheEye's source code. For regular users, please follow the easy automatic installation tutorial instead

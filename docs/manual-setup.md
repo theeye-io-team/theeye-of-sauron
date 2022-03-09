@@ -1,6 +1,6 @@
 # Database Setup 
 
-![TheEye Logo](./images/TheEye-Of-Sauron.png)
+![TheEye Logo](./images/logo-theeye-theOeye-logo2.png)
 
 TheEye's database comes packaged and preconfigured to work with the [quick start](./README.md#automatic-installation) script. In order to install it manually there are a couple of changes necesary.
 

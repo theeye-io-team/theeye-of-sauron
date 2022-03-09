@@ -56,7 +56,7 @@ sudo usermod -aG docker $USER
 
 
 
-## QuickStart
+## Automatic installation
 
 1. Clone: `git clone https://github.com/theeye-io-team/theeye-of-sauron && cd theeye-of-sauron`   
 
@@ -67,32 +67,12 @@ sudo usermod -aG docker $USER
 3. Navigate to http://localhost:6080    
 
 
-## Other Info
+## Manual installation
 
-## DB Import using data creation script (customizable)
+You may want to install TheEye from its source code, as if you were compiling it yourself. If that's the case, you can check [this guide](./manual-setup.md) to learn how to deploy TheEye's database as a standalone image. You will also need to deploy the [Web interface](http://github.com/theeye-io-team/theeye-web), the [Supervisor](http://github.com/theeye-io-team/theeye-supervisor) and the [Gateway](http://github.com/theeye-io-team/theeye-gateway) from their respective repos
 
-1. start docker
-
-```bash
-docker-compose -f docker-storage-compose.yml up -d
-```
-2. cp db-import into mongodump directory
-
-```bash
-cp db-import.js mongodump
-```
-
-3. edit db-import.js. replace the first line with the db name you want
-
-```javascript
-const dbName = 'theeye-root'
-```
-
-4. execute the import script. WARNING! The script will destroy all the data in the target db
-
-```bash
-docker exec -it theeye-mongodb mongo /data/dump/db-import.js
-```
+> Note:
+>   This is only intended for developers that intend to work on TheEye's source code. For regular users, please follow the easy automatic installation tutorial instead
 
 ## Documentation
 

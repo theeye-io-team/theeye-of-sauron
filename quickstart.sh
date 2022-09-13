@@ -16,9 +16,11 @@ then
     echo "install docker-compose to continue the installation"
     exit
   else
+    docker-compose -f ${cwd}/quickstart.yml pull
     docker-compose -f ${cwd}/quickstart.yml up -d
   fi
 else
+  docker compose -f ${cwd}/quickstart.yml pull
   docker compose -f ${cwd}/quickstart.yml up -d
 fi
 

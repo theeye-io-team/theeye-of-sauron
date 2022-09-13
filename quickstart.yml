@@ -91,7 +91,7 @@ services:
     container_name: theeye-web
     volumes:
       - ./web:/output
-    command: cp -r /app/dist/. /output # export sources
+    command: sh /app/misc/quickstart/export.sh
 
   theeye-gateway:
     image: theeye/theeye-gateway

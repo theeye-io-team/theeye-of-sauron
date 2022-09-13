@@ -1,23 +1,36 @@
+#!/bin/bash
 
 cwd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 cd ${cwd}
 tar -xzf theeye-mongodb.tgz
 
-echo "################"
+echo "####################"
 echo "# starting engines"
-echo "################"
-docker-compose -f ${cwd}/quickstart.yml up -d
+echo "####################"
 
-# local web configuration
-cp config/web.js web/config.js
-sed -i 's|<!--[if true]><script src="/config.js"></script><![endif]-->|<script src="/config.js"></script>|' web/config.js
+if ! docker --help | grep compose;
+then
+  if ! command -v docker-compose;
+  then
+    echo "install docker-compose to continue the installation"
+    exit
+  else
+    docker-compose -f ${cwd}/quickstart.yml up -d
+  fi
+else
+  docker compose -f ${cwd}/quickstart.yml up -d
+fi
 
-echo "################"
+echo "#####################"
 echo "# importing database"
-echo "################"
+echo "#####################"
+
+echo "The database will be replaced with the initial dump. Press Enter to continue"
+read 
+
 # mongodb initial data import
-docker exec -it theeye-mongodb mongorestore /data/dump/
+docker exec -it theeye-mongodb mongorestore --drop /data/dump/
 
 echo "################"
 echo "# sign in using username:root and password:12345678 <- Change this ASAP. If you are considering using open to the internet."

@@ -146,5 +146,5 @@ services:
         #- THEEYE_AGENT_SCRIPT_PATH='/opt/theeye-agent/scripts'
 
 networks:
-   theeye:
-      driver: bridge
+  theeye:
+    driver: bridge

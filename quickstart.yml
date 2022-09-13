@@ -63,8 +63,7 @@ services:
       - theeye
 
   theeye-supervisor:
-    build: ./sources/theeye-supervisor
-    image: theeye-io/theeye-supervisor
+    image: theeye/theeye-supervisor
     container_name: theeye-supervisor
     hostname: supervisor
     domainname: supervisor
@@ -87,19 +86,25 @@ services:
       - API_DISABLED=
       - PORT=60080
 
+  theeye-web:
+    image: theeye/theeye-web
+    container_name: theeye-web
+    volumes:
+      - ./web:/output
+    command: cp -r /app/dist/. /output # export sources
+
   theeye-gateway:
-    build: ./sources/theeye-gateway/
-    image: theeye-io/theeye-gateway
+    image: theeye/theeye-gateway
     container_name: theeye-gateway
     hostname: gateway
     domainname: gateway
     links:
+      - theeye-web
       - theeye-mongodb
       - theeye-redis
       - theeye-ldap
       - theeye-mailserver
     ports:
-      #- "9229:9229"
       - "6080:6080"
     volumes:
       - ./config/gateway.json:/src/theeye/gateway/server/config/production.json
@@ -116,10 +121,6 @@ services:
       - THEEYE_NODE_HOSTNAME=theeye
       - NODE_ENV=production
       - PORT=6080
-    #command:
-    #  - 'node'
-    #  - '--inspect=0.0.0.0:9229'
-    #  - './server'
 
   theeye-agent:
     image: theeye/theeye-agent:development
@@ -144,16 +145,6 @@ services:
       - THEEYE_CLIENT_HOSTNAME=theeye
         #- THEEYE_AGENT_SCRIPT_PATH='/opt/theeye-agent/scripts'
 
-  theeye-web:
-    image: theeye-io/theeye-web
-    build:
-      context: ./sources/theeye-web
-      dockerfile: Dockerfile
-      args:
-        - NODE_ENV=docker
-    container_name: theeye-web
-
 networks:
    theeye:
-      external:
-         name: theeye
+      driver: bridge

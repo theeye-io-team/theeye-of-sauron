@@ -64,5 +64,4 @@ services:
 
 networks:
    theeye:
-      external:
-         name: theeye
+     driver: bridge

@@ -54,7 +54,13 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
 
+## Video tutorial
 
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/fIWAg2Yp__A" 
+frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
 
 ## Automatic installation
 

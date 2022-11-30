@@ -3,7 +3,7 @@
 <table>
   <tr>
     <td> <img src="./docs/images/TheEye-Of-Sauron.png"></td>
-    <td> TheEye is a low-code process automation platform developed in NodeJS. Best used as BPM, Rapid Backoffice Development (RDA), Policy Manager and processes' hub.
+    <td> TheEye is a low-code process automation platform developed in NodeJS. Best used as BPM, Rapid Backoffice Development (RAD), Policy Manager and processes' hub.
 Technically TheEye is a choreographer.
     </td>
    </tr> 

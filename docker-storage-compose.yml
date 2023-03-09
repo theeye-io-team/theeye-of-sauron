@@ -16,7 +16,7 @@ services:
       - theeye
 
   theeye-mongodb:
-    image: mongo:4.2
+    image: mongo:6
     container_name: theeye-mongodb
     ports:
       - "27017:27017"

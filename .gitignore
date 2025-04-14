@@ -22,3 +22,5 @@ sources
 redis
 mongodb
 scripts/
+docker-data/
+nginx/sites

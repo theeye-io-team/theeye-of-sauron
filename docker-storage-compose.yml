@@ -1,5 +1,3 @@
-version: '2'
-
 # Maintainer: facugon
 # this is used for development
 
@@ -11,18 +9,18 @@ services:
     ports:
       - "6379:6379"
     volumes:
-       - /srv/docker/redis:/data
+      - ./docker-data/redis:/data
     networks:
       - theeye
 
   theeye-mongodb:
-    image: mongo:6
+    image: mongo:8.0.0-rc20
     container_name: theeye-mongodb
     ports:
       - "27017:27017"
     restart: always
     volumes:
-      - /srv/docker/mongodb:/data/db
+      - ./docker-data/mongodb:/data/db
       - ./mongodump:/data/dump
     networks:
       - theeye   
@@ -55,6 +53,7 @@ services:
     container_name: theeye-nginx
     restart: always
     volumes: 
+      - ./nginx/sites/:/etc/nginx/sites/:ro
       - ./nginx/etc/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/logs/:/var/log/nginx/
     ports:
@@ -63,5 +62,5 @@ services:
       - theeye
 
 networks:
-   theeye:
-     driver: bridge
+  theeye:
+    driver: bridge
